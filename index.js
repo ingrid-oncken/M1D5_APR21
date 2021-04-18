@@ -236,10 +236,9 @@ const splitMe = function (quote1) {
   return quote1.split();
 };
 
-let quote1Array = splitMe(
-  `Discipline yourself, and others won't need to. - John Wooden`
+console.log(
+  splitMe(`Discipline yourself, and others won't need to. - John Wooden`)
 );
-console.log(quote1Array);
 
 console.log("-----------------------------\n\n");
 
@@ -267,14 +266,33 @@ console.log("-----------------------------\n\n");
 */
 console.log("----------EXERCISE 5----------");
 
+//Using the regExp aproach
 const onlyLetters = function (string5) {
   return string5.replace(/\d/g, ""); // /\d/ is equivalent to /[0-9]/
 };
 
-let olStr = onlyLetters(
-  `On September 7, 1822, Prince Dom Pedro declared Brazil's independence from Portugal`
+console.log(
+  onlyLetters(
+    `On September 7, 1822, Prince Dom Pedro declared Brazil's independence from Portugal`
+  )
 );
-console.log(olStr);
+
+//Diego's approach saw on the Homework Walkthrough
+//we need to check if a specific string is a letter or number, for that we can invoque the function isNaN, then run a loop into the string
+
+function onlyLetters2(str5) {
+  let result = "";
+  for (let i = 0; i < str5.length; i++) {
+    //here, for each letter we will be checking is it is a number or not
+    let currentLetter = str5[i];
+    if (isNaN(currentLetter)) result += currentLetter; //then, if it is not a number we will return the string to result, += will add the current string to the previous ones
+  }
+  return result;
+}
+console.log(
+  `This is the homework walkingthrough: ` +
+    onlyLetters2(`ab1cd2ef3gh4ij5kl6mn7op8qr0`)
+);
 
 console.log("-----------------------------\n\n");
 
@@ -285,14 +303,44 @@ console.log("----------EXERCISE 6----------");
 
 const isThisAnEmail = function (string6) {
   return /[@.]/.test(string6);
-  //The regular expression /[@.]/ will check if within my string6 there is an @ and a . to make sure it's email
+  
+
+  //The regular expression /[@.]/ will check if within my string6 there is an @ and a . to check if it's an email
   //The .test method is aplyes with a regexp and return a boolean
 };
 
-let itaeVar = isThisAnEmail(`ingrid.oncken@gmail.com`);
-console.log(itaeVar);
+//above I'll using Diego's approach that don't use regExp
+
+const isThisAnEmail2 = function (email) {
+  return email.indexOf(`@`) > 0 && email.indexOf(`.`) > 0; //indexOf returns the index of the element, if it is found in the array/String, or -1 if it's not found in the string
+};
+console.log(`Diego's resolution ` + isThisAnEmail2(`thisIsNotEmail.com`));
 
 console.log("-----------------------------\n\n");
+
+//Bellow pseudocode from classemates to study later
+/* let email = "emiliankasemi@gmail.com";
+
+const isThisAnEmail = function (string) {
+  // if email adress is valid, return true
+  if (string === email) {
+    console.log("The email is valid");
+  } else if (string !== email) {
+    console.log("The email is not valid");
+  }
+};
+
+console.log(isThisAnEmail("emiliankasemi@gmail.com")); */
+
+/* const isThisAnEmail = function(str) {
+  let parts = str.split('@')
+  if(parts.length===2) {
+    let domainParts = parts[1].split('.')
+    if(domainParts.length >= 2) {
+      return true 
+    }
+  }
+  return false */
 
 /* Ex.7
    Write a function called "whatDayIsIt" that should return the current day of the week.
@@ -313,43 +361,7 @@ const whatDayIsIt = function (dayToday) {
   return daysOfWeek[todayIs];
 };
 const day = new Date();
-let printToday = whatDayIsIt(day);
-console.log(printToday);
-
-/**
- * Function takes in a Date object and returns the day of the week in a text format.
- */
-/* const whatDayIsIt = function () {
-  let date = new Date();
-
-  let nDay = date.getDay();
-  const week = ["Sunday", "Mon", "Tue", "wed"];
-
-  switch (nDay) {
-    case 1:
-      console.log("Today is Monday");
-      break;
-    case 2:
-      console.log("Today is Tuesday");
-      break;
-    case 3:
-      console.log("Today is Wednesday");
-      break;/*  */
-/*  case 4:
-      console.log("Today is Thursday");
-      break;
-    case 5:
-      console.log("Today is Friday");
-      break;
-    case 6:
-      console.log("Today is Saturday");
-      break;
-    case 7:
-      console.log("Today is Sunday");
-      break;
-  }
-};
-whatDayIsIt(); */
+console.log(`Today is ` + whatDayIsIt(day));
 
 console.log("-----------------------------\n\n");
 /* Ex.8
@@ -378,7 +390,7 @@ const howManyDays = function (date) {
   console.log(diff);
 };
 
-const day1 = new Date("1995-12-17");
+const day1 = new Date("1986-06-03");
 
 howManyDays(day1);
 console.log("-----------------------------\n\n");
@@ -389,13 +401,12 @@ console.log("-----------------------------\n\n");
 console.log("----------EXERCISE 10----------");
 
 const isTodayMyBirthday = function () {
-  let day = new Date().getDate();
-  let month = new Date().getMonth();
-  return day === 3 && month === 6;
+  let day = new Date().getDate(); //this is getting the day today and storing in the variable day
+  let month = new Date().getMonth(); //this is getting this month and storing in the variable month
+  return day === 3 && month === 6; //this line is comparing the actual day/month to my birthday day/month, and returning true or false
 };
 
-let itmB = isTodayMyBirthday();
-console.log(itmB);
+console.log(`Is today my birthday? ` + isTodayMyBirthday());
 
 console.log("------------------------------\n\n");
 
